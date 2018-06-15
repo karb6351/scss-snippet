@@ -1,0 +1,13 @@
+html, body, ol, ul, dl, li, section, nav, {
+  margin: 0;
+  padding: 0;
+}
+
+ol, ul, dl{
+  list-style-type: none;
+}
+
+a{
+  text-decoration: none;
+  color: $black;
+}
