@@ -10,4 +10,7 @@ ol, ul, dl{
 a{
   text-decoration: none;
   color: $black;
+  &:hover, &:active{
+    color: $black;
+  }
 }
