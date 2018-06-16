@@ -2,14 +2,7 @@
 @import "./base/variables.scss";
 @import "./base/mixins.scss";
 @import "./base/placeholders.scss";
-
-/*-----------------------------frameworks-------------------------------*/
-@import "./framework/grid.scss";
-@import "./framework/layout.scss";
-
-/*-----------------------------modules----------------------------------*/
-@import "./modules/button.scss";
-
+@import "./base/layout.scss";
 
 /*-----------------------------customes---------------------------------*/
 //....

@@ -1,3 +1,18 @@
+/*-----------------------------common--------------------------------------*/
+
+@mixin size($width, $height: $width){
+  width: $width;
+  height: $height;
+}
+
+@mixin text($size: 16, $weight: normal, $color: $black){
+  font{
+    size: $size;
+    weight: $weight;
+  }
+  color: $color;
+}
+
 /*-----------------------------position mixins-----------------------------*/
 
 //i.e the $args should be something like this: left 1em top 1.5em
@@ -34,8 +49,8 @@
   @include position(sticky, $args);
 }
 
-
 /*-----------------------------transforms mixins----------------------------*/
+
 // It is supports mutil transforms thought transform function
 // i.e @include transform(scale(1.5) rotate(180deg))
 // The transform-origin function should include separatly
@@ -75,3 +90,53 @@
 @mixin skew($x, $y) {
    @include transform(skew(#{$x}deg, #{$y}deg));
 }
+
+/*-----------------------------box shadow-------------------------------*/
+
+@mixin box-shadow($args){
+  -webkit-box-shadow: $args;
+  -moz-box-shadow: $args;
+  box-shadow: $args;
+}
+
+/*-----------------------------border radius-----------------------------*/
+
+@mixin border-radius($top-left, $top-right: $top-left, $bottom-right: $top-left, $bottom-left: $top-left){
+  border-top-left-radius: $top-left;
+  border-top-right-radius: $top-right;
+  border-bottom-right-radius: $bottom-right;
+  border-bottom-left-radius: $bottom-left;
+}
+
+@mixin border($size, $type, $color, $positions: all){
+  @extend %border;
+  @if $positions == all {
+    border: $size $type $color;
+  }@else{
+    @each $position in $positions{
+      border-#{$position}: $size $type $color;
+    }
+  }
+}
+
+/*-----------------------------grid system------------------------------*/
+
+//the args should input property follow by value
+//i.e justify-content space-bewteen align-items baseline
+
+@mixin display-flex($args...){
+  @extend %flex-placeholder;
+  $pros: flex-wrap flex-direction justify-content align-items;
+  @each $pro in $pros{
+    $i: index($args, $pro);
+    @if $i and $i + 1 <= length($args) and type-of( nth($args, $i + 1) ) == number {
+      #{$pro}: nth($args, $i + 1);
+    }
+  }
+}
+
+// @mixin flex($glow, $shrink, $width, $align-self){
+//   @extend %flex-item-placeholder;
+//   flex: $glow, $shrink, $width;
+//   align-self: $align-self;
+// }

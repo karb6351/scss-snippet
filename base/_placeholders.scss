@@ -1,4 +1,48 @@
+/*-----------------------------common-----------------------------*/
 %main-content{
   max-width: $content-width;
   margin: 0 auto;
 }
+
+%btn{
+  padding: 10px 40px;
+  cursor: pointer;
+  border: none;
+  background-color: $black;
+  color: $white;
+  font-size: 16px;
+  margin: 5px 0;
+  text-align: center;
+  display: block;
+}
+
+%background{
+  background-image: none;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: transparent;
+}
+
+%block-img{
+  display: block;
+  margin:0 auto;
+}
+
+%border{
+  border: 1px solid transparent;
+}
+
+/*--------------------------grid system---------------------------*/
+%flex-placeholder{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+// %flex-item-placeholder{
+//   flex: 0 0 auto;
+//   align-self: auto;
+// }
