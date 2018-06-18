@@ -5,12 +5,23 @@
   height: $height;
 }
 
-@mixin text($size: 16, $weight: normal, $color: $black){
-  font{
+@mixin max-size($max-width, $max-height: $max-width){
+  max-width: $max-width;
+  max-height: $max-height;
+}
+
+@mixin text($size: 16px, $weight: normal, $color: $black){
+  font: {
     size: $size;
     weight: $weight;
   }
   color: $color;
+}
+
+@mixin fit-content($prop){
+  #{$prop}: -webkit-fit-content;
+  #{$prop}: -moz-fit-content;
+  #{$prop}: fit-content;
 }
 
 /*-----------------------------position mixins-----------------------------*/
@@ -18,7 +29,7 @@
 //i.e the $args should be something like this: left 1em top 1.5em
 //one direction follow by one value
 
-@mixin position($position, $args) {
+@mixin pos($position, $args) {
   $offsets: top right bottom left;
   @each $offest in $offsets {
     $i: index($args, $offest);
@@ -26,32 +37,36 @@
       #{$offest}: nth($args, $i + 1);
     }
   }
+  -webkit-position: $position;
+  -moz-position: $position;
+  -ms-position: $position;
+  -o-position: $position;
   position: $position;
 }
 
 //absolute
-@mixin absolute($args) {
-  @include position(absolute, $args);
+@mixin absolute($args: null) {
+  @include pos(absolute, $args);
 }
 
 //fixed
-@mixin fixed($args) {
-  @include position(fixed, $args);
+@mixin fixed($args: null) {
+  @include pos(fixed, $args);
 }
 
 //relative
-@mixin relative($args) {
-  @include position(relative, $args);
+@mixin relative($args: null) {
+  @include pos(relative, $args);
 }
 
 //sticky
-@mixin sticky($args) {
-  @include position(sticky, $args);
+@mixin sticky($args: null) {
+  @include pos(sticky, $args);
 }
 
 /*-----------------------------transforms mixins----------------------------*/
 
-// It is supports mutil transforms thought transform function
+// It supports mutil transforms thought transform function
 // i.e @include transform(scale(1.5) rotate(180deg))
 // The transform-origin function should include separatly
 // i.e @include rotate(180deg)
@@ -108,13 +123,12 @@
   border-bottom-left-radius: $bottom-left;
 }
 
-@mixin border($size, $type, $color, $positions: all){
-  @extend %border;
+@mixin border($width: 1px, $type: solid, $color: $transparent, $positions: all){
   @if $positions == all {
-    border: $size $type $color;
+    border: $width $type $color;
   }@else{
     @each $position in $positions{
-      border-#{$position}: $size $type $color;
+      border-#{$position}: $width $type $color;
     }
   }
 }
@@ -124,16 +138,21 @@
 //the args should input property follow by value
 //i.e justify-content space-bewteen align-items baseline
 
-@mixin display-flex($args...){
-  @extend %flex-placeholder;
-  $pros: flex-wrap flex-direction justify-content align-items;
-  @each $pro in $pros{
-    $i: index($args, $pro);
-    @if $i and $i + 1 <= length($args) and type-of( nth($args, $i + 1) ) == number {
-      #{$pro}: nth($args, $i + 1);
+@mixin display-flex($args: null){
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  $props: justify-content align-items flex-direction flex-wrap;
+  @each $prop in $props{
+    $index: index($args, $prop);
+    @if $index and $index + 1 <= length($args) {
+      #{ $prop }: nth($args, $index + 1);
     }
   }
 }
+
 
 // @mixin flex($glow, $shrink, $width, $align-self){
 //   @extend %flex-item-placeholder;

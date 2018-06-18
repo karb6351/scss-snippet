@@ -17,11 +17,9 @@
 }
 
 %background{
-  background-image: none;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  background-color: transparent;
 }
 
 %block-img{
@@ -29,18 +27,15 @@
   margin:0 auto;
 }
 
-%border{
-  border: 1px solid transparent;
-}
-
 /*--------------------------grid system---------------------------*/
-%flex-placeholder{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
+//%flex-placeholder{
+//  display: flex;
+//  flex-wrap: wrap;
+//  flex-direction: row;
+//  justify-content: flex-start;
+//  align-items: flex-start;
+//}
+
 
 // %flex-item-placeholder{
 //   flex: 0 0 auto;
